@@ -3,7 +3,7 @@ package search;
 import java.util.ArrayList;
 
 public class SearchEngine {
-    public static ArrayList<String> search(String[] data, String searchTerm) {
+    public static ArrayList<String> search(ArrayList<String> data, String searchTerm) {
         ArrayList<String> results = new ArrayList<>();
 
         String lowerCaseSearchTerm = searchTerm.toLowerCase();

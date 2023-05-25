@@ -13,24 +13,32 @@ public class Main {
         scanner.nextLine();
 
         System.out.println("Enter all people:");
-        String[] data = new String[numOfDataPoints];
+        ArrayList<String> data = new ArrayList<>(numOfDataPoints);
         for (int i = 0; i < numOfDataPoints; i++) {
-            data[i] = scanner.nextLine();
+            data.add(scanner.nextLine());
         }
 
-        System.out.println("Enter the number of search queries:");
-        int numOfQueries = scanner.nextInt();
-        scanner.nextLine();
+        while (true) {
+            int option = Console.getMenuOption();
 
-        String searchTerm;
-        ArrayList<String> results;
-        for(int i = 0; i < numOfQueries; i++) {
-            System.out.println("Enter data to search people:");
-            searchTerm = scanner.nextLine();
-            results = SearchEngine.search(data, searchTerm);
-            Display.displayData(results, "people");
+            if (option == 0) {
+                System.out.println("Bye!");
+                break;
+            }
+
+            if (option == 2) {
+                System.out.println("=== List of people ===");
+                Console.displayData(data);
+            }
+
+            if (option == 1) {
+                String searchTerm = Console.getSearchTerm();
+                ArrayList<String> results = SearchEngine.search(data, searchTerm);
+                Console.displayData(results);
+            }
         }
 
-        scanner.close();
+
+
     }
 }
