@@ -1,21 +1,36 @@
 package search;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
 
-        Scanner scanner = new Scanner(System.in);
+        ArrayList<String> data = new ArrayList<>();
+        if (args.length == 2) {
+            String filename = args[1];
 
-        System.out.println("Enter the number of people:");
-        int numOfDataPoints = scanner.nextInt();
-        scanner.nextLine();
+            try (Scanner scanner = new Scanner(new File(filename))) {
+                while(scanner.hasNextLine()) {
+                    data.add(scanner.nextLine());
+                }
+            } catch (FileNotFoundException e) {
+                System.out.println(e.getMessage());
+            }
+        } else {
+            Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Enter all people:");
-        ArrayList<String> data = new ArrayList<>(numOfDataPoints);
-        for (int i = 0; i < numOfDataPoints; i++) {
-            data.add(scanner.nextLine());
+            System.out.println("Enter the number of people:");
+            int numOfDataPoints = scanner.nextInt();
+            scanner.nextLine();
+
+            System.out.println("Enter all people:");
+            data = new ArrayList<>(numOfDataPoints);
+            for (int i = 0; i < numOfDataPoints; i++) {
+                data.add(scanner.nextLine());
+            }
         }
 
         while (true) {
@@ -37,7 +52,6 @@ public class Main {
                 Console.displayData(results);
             }
         }
-
 
 
     }
